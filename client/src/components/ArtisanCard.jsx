@@ -37,10 +37,10 @@ Rating.propTypes = {
 ============================================ */
 export default function ArtisanCard({
   specialty,
-  image,
+  image = null,
   name,
-  description,
-  location,
+  description = "",
+  location = "",
   rating = 0,
   className = "",
 }) {
@@ -86,12 +86,4 @@ ArtisanCard.propTypes = {
   location: PropTypes.string,
   rating: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   className: PropTypes.string,
-};
-
-ArtisanCard.defaultProps = {
-  image: null,
-  description: "",
-  location: "",
-  rating: 0,
-  className: "",
 };

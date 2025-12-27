@@ -1,5 +1,7 @@
 // ContactForm.jsx
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 import '../styles/ContactForm.scss';
 import Logo from "../assets/images/email.png";
 
@@ -43,7 +45,8 @@ const Field = ({ id, label, type = 'text', required = true, field, setField, pla
   };
 
   const onFocus = () => {
-    setField((prev) => ({ ...prev, state: prev.state === 'success' ? 'success' : 'editing' }));
+    // On conserve l'état actuel au focus (ex: erreur) jusqu'à ce que l'utilisateur modifie le champ
+    // setField((prev) => ({ ...prev, state: prev.state === 'success' ? 'success' : 'editing' }));
   };
 
   const className = [
@@ -93,7 +96,7 @@ const Field = ({ id, label, type = 'text', required = true, field, setField, pla
         />
       )}
 
-      <div className="field-feedback" id={ariaDescribedBy}>
+      <div className="field-feedback" id={ariaDescribedBy} aria-live="polite">
         {field.state === 'editing' && (
           <>
             <span className="icon icon--info" aria-hidden="true" />
@@ -117,12 +120,28 @@ const Field = ({ id, label, type = 'text', required = true, field, setField, pla
   );
 };
 
+Field.propTypes = {
+  id: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  type: PropTypes.string,
+  required: PropTypes.bool,
+  field: PropTypes.shape({
+    value: PropTypes.string,
+    state: PropTypes.string,
+    error: PropTypes.string,
+  }).isRequired,
+  setField: PropTypes.func.isRequired,
+  placeholder: PropTypes.string,
+  as: PropTypes.string,
+};
+
 export default function ContactForm() {
   const [nom, setNom] = useState(initialField);
   const [email, setEmail] = useState(initialField);
   const [objet, setObjet] = useState(initialField);
   const [message, setMessage] = useState(initialField);
   const [submitted, setSubmitted] = useState(false);
+  const navigate = useNavigate();
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -142,11 +161,7 @@ export default function ContactForm() {
   };
 
   const onBack = () => {
-    setNom(initialField);
-    setEmail(initialField);
-    setObjet(initialField);
-    setMessage(initialField);
-    setSubmitted(false);
+    navigate(-1);
   };
 
   return (

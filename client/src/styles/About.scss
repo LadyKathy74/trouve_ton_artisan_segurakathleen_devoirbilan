@@ -8,9 +8,11 @@
   background-color: $blue-light;
   min-height: 100vh;
   @include flex-column;
+  font-family: $font-family-base;
 }
 
 .about-content {
+  flex: 1; // Pousse le footer vers le bas si le contenu est court
   max-width: 900px;
   margin: 60px auto;
   padding: 0 20px;

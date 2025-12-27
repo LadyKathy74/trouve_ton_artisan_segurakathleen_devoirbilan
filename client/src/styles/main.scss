@@ -1,15 +1,8 @@
+// 🌐 Police Inter (Doit être en premier)
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
 @import './_variables';
 @import './_mixins';
-
-// Composants
-@import './Header.scss';
-@import './Footer.scss';
-@import './ArtisanCard.scss';
-@import './ContactForm.scss';
-@import './ArtisanList.scss';
-
-// 🌐 Police Inter
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
 /* =============================================
    🔄 RESET GLOBAL
@@ -28,6 +21,7 @@ body {
   background-color: $blue-light;
   line-height: 1.6;
   min-height: 100vh;
+  scroll-behavior: smooth;
 }
 
 /* =============================================

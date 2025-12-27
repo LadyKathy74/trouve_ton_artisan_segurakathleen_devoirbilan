@@ -64,8 +64,8 @@
      HAMBURGER
   ============================================== */
   .hamburger {
-    display: none;
     @include flex-column(5px);
+    display: none;
     background: none;
     border: none;
     cursor: pointer;
@@ -174,11 +174,6 @@
       display: flex;
     }
 
-    .search-dt {
-      display: flex;
-      margin-left: auto;
-    }
-
     .nav-menu {
       position: absolute;
       top: 100%;
@@ -192,13 +187,15 @@
       border-bottom: 1px solid lighten($gray-dark, 60%);
       transform: translateX(100%);
       opacity: 0;
+      visibility: hidden; // Accessibilité : cache le contenu focusable
       pointer-events: none;
-      @include transition(0.35s ease);
+      transition: transform 0.35s ease, opacity 0.35s ease, visibility 0.35s ease;
       z-index: 998;
 
       &.open {
         transform: translateX(0);
         opacity: 1;
+        visibility: visible;
         pointer-events: auto;
       }
 
@@ -209,6 +206,17 @@
         li a {
           width: 100%;
           text-align: center;
+        }
+      }
+
+      // Ajustement de la barre de recherche dans le menu glissant
+      .search-dt {
+        width: 100%;
+        margin: 0;
+        justify-content: center;
+
+        input.form-control {
+          width: 100%; // Pleine largeur sur tablette/mobile
         }
       }
     }

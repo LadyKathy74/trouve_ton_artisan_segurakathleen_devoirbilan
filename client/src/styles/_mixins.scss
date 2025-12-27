@@ -1,7 +1,7 @@
 @import './_variables';
 
 // =============================================
-// 📐 RESPONSIVE (mobile-first)
+// 📐 RESPONSIVE (Desktop-first / Max-width)
 // Utilisation :
 // @include respond-to(md) { ... }
 // =============================================
@@ -105,10 +105,14 @@
 // =============================================
 @mixin visually-hidden {
   position: absolute !important;
-  height: 1px; width: 1px;
-  overflow: hidden;
-  clip: rect(1px, 1px, 1px, 1px);
-  white-space: nowrap;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
 }
 
 // =============================================
@@ -145,7 +149,7 @@
   color: $color;
   padding: 12px 22px;
   border-radius: 10px;
-  border: none;
+  border: 1px solid transparent; // Préserve l'alignement avec les boutons à bordure
   font-weight: 600;
   font-size: 1rem;
   cursor: pointer;

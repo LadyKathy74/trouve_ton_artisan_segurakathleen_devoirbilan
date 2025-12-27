@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 import constructionImage from "../assets/images/en-construction.png";
 import "../styles/_en-construction.scss";
 
-const Accessibilite = () => {
+export default function Accessibilite() {
   return (
     <div className="accessibilite-page">
       <Header />
@@ -34,6 +34,4 @@ const Accessibilite = () => {
       <Footer />
     </div>
   );
-};
-
-export default Accessibilite;
+}

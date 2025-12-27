@@ -6,43 +6,39 @@
   position: relative;
   display: inline-block;
   margin-bottom: 1.5rem;
-  color: $blue-primary; // corrigé
-  font-weight: 600;
+  color: $blue-dark;
+  font-weight: 700;
 
   &::after {
     content: "";
     display: block;
-    width: 100px;
+    width: 80px;
     height: 4px;
-    background-color: $green-light; // corrigé
-    margin-top: 6px;
+    background-color: $green-light;
+    margin-top: 10px;
     border-radius: 2px;
   }
 }
 
 /* ArtisanList styles */
 .artisan-list-page {
-  display: flex;
-  flex-direction: column;
+  background-color: $blue-light;
   min-height: 100vh;
+  @include flex-column;
+  font-family: $font-family-base;
 
   main {
     flex: 1;
-    padding: 2rem;
-    background-color: $blue-light; // corrigé
+    padding: 40px 20px;
     max-width: 1200px;
     margin: 0 auto;
     width: 100%;
   }
 
-  .search-zone {
-    margin-bottom: 2rem;
-  }
-
   .artisan-cards {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
   }
 }
 
@@ -50,25 +46,8 @@
 @include respond-to(md) {
   .artisan-list-page {
     main {
-      padding: 1.5rem;
-    }
-
-    .artisan-cards {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.5rem;
+      padding: 20px;
     }
   }
 }
 
-@include respond-to(sm) {
-  .artisan-list-page {
-    main {
-      padding: 1rem;
-    }
-
-    .artisan-cards {
-      grid-template-columns: 1fr;
-      gap: 1rem;
-    }
-  }
-}

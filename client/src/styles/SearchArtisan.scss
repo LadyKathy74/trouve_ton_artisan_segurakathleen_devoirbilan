@@ -1,5 +1,5 @@
-@import './_variables.scss';
-@import './_mixins.scss';
+@import './_variables';
+@import './_mixins';
 
 /* =============================================
    🔍 SEARCH ARTISAN — Barre de filtres
@@ -34,7 +34,12 @@
   }
 
   .btn-secondary {
-    @include button-style($gray-dark, white);
+    @include button-style(white, $blue-dark);
+    border: 1px solid $blue-dark;
+
+    &:hover {
+      background: darken(white, 5%);
+    }
   }
 }
 /* =============================================
@@ -46,7 +51,9 @@
     align-items: center;
 
     input,
-    select {
+    select,
+    .btn-primary,
+    .btn-secondary {
       width: 100%;
       max-width: 300px;
     }

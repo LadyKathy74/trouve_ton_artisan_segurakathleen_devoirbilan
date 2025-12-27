@@ -8,6 +8,7 @@
   background-color: $blue-light;
   min-height: 100vh;
   @include flex-column;
+  font-family: $font-family-base;
 }
 
 /* =============================================
@@ -89,4 +90,22 @@
   margin-bottom: 20px;
   padding-bottom: 15px;
   border-bottom: 1px solid $gray-light;
+}
+
+/* =============================================
+   📱 RESPONSIVE
+============================================= */
+@include respond-to(md) {
+  .admin-content {
+    margin: 40px auto;
+
+    h1 {
+      font-size: 2rem;
+    }
+  }
+
+  .login-section,
+  .dashboard-section {
+    padding: 20px;
+  }
 }

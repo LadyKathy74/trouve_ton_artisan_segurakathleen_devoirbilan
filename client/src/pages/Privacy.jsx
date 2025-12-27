@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 import constructionImage from "../assets/images/en-construction.png";
 import "../styles/_en-construction.scss";
 
-const Privacy = () => {
+export default function Privacy() {
   return (
     <div className="privacy-page">
       <Header />
@@ -33,6 +33,4 @@ const Privacy = () => {
       <Footer />
     </div>
   );
-};
-
-export default Privacy;
+}

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import "../styles/SearchArtisan.scss";
 
-export default function SearchArtisan({ onSearch, onShowAll }) {
+export default function SearchArtisan({ onSearch = () => {}, onShowAll = () => {} }) {
   const [filters, setFilters] = useState({
     name: "",
     category: "",
@@ -30,13 +30,14 @@ export default function SearchArtisan({ onSearch, onShowAll }) {
   };
 
   return (
-    <form className="search-artisan" onSubmit={handleSubmit}>
+    <form className="search-artisan" onSubmit={handleSubmit} role="search">
       <input
         type="text"
         name="name"
         placeholder="Nom de l’artisan"
         value={filters.name}
         onChange={handleChange}
+        aria-label="Rechercher par nom"
       />
 
       <input
@@ -45,6 +46,7 @@ export default function SearchArtisan({ onSearch, onShowAll }) {
         placeholder="Spécialité"
         value={filters.category}
         onChange={handleChange}
+        aria-label="Rechercher par spécialité"
       />
 
       <input
@@ -53,9 +55,10 @@ export default function SearchArtisan({ onSearch, onShowAll }) {
         placeholder="Localisation"
         value={filters.location}
         onChange={handleChange}
+        aria-label="Rechercher par localisation"
       />
 
-      <select name="rating" value={filters.rating} onChange={handleChange}>
+      <select name="rating" value={filters.rating} onChange={handleChange} aria-label="Filtrer par note minimale">
         <option value="">Note</option>
         <option value="5">★★★★★</option>
         <option value="4">★★★★☆</option>
@@ -78,9 +81,4 @@ export default function SearchArtisan({ onSearch, onShowAll }) {
 SearchArtisan.propTypes = {
   onSearch: PropTypes.func,
   onShowAll: PropTypes.func,
-};
-
-SearchArtisan.defaultProps = {
-  onSearch: () => {},
-  onShowAll: () => {},
 };

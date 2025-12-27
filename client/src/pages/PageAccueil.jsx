@@ -9,7 +9,7 @@ import ArtisanCard from "../components/ArtisanCard.jsx";
 import designImage from "../assets/images/Design.png";
 import "../styles/PageAccueil.scss";
 
-const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3001";
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3002";
 
 export default function PageAccueil() {
   const [artisansDuMois, setArtisansDuMois] = useState([]);
@@ -22,19 +22,28 @@ export default function PageAccueil() {
     const fetchArtisans = async () => {
       try {
         const response = await fetch(`${API_URL}/api/artisans`);
+        if (!response.ok) {
+          throw new Error(`Erreur HTTP : ${response.status}`);
+        }
         const data = await response.json();
+
+        if (!Array.isArray(data)) {
+          throw new Error("Les données reçues ne sont pas un tableau");
+        }
 
         const formatted = data.map((item) => ({
           id: item.id_artisan,
-          name: item.nom,
-          rating: Number(item.note),
-          location: item.ville,
-          specialty: item.Specialite?.nom_specialite || "Divers",
+          name: item.nom || "",
+          rating: Number(item.note) || 0,
+          location: item.ville || "",
+          specialty: item.Specialite?.nom_specialite || item.nom_specialite || "Divers",
+          category: item.Specialite?.Categorie?.nom_categorie || item.nom_categorie || item.categorie || "",
           image: item.image ? `${API_URL}/images/${item.image}` : null,
         }));
 
-        // Sélection des 3 artisans du mois
-        setArtisansDuMois(formatted.slice(0, 3));
+        // Sélection des 3 artisans du mois (les mieux notés)
+        const topArtisans = formatted.sort((a, b) => b.rating - a.rating).slice(0, 3);
+        setArtisansDuMois(topArtisans);
       } catch (error) {
         console.error("Erreur lors du chargement des artisans :", error);
       } finally {
@@ -68,7 +77,7 @@ export default function PageAccueil() {
           </div>
 
           <div className="page-accueil__intro-image" aria-hidden="true">
-            <img src={designImage} alt="Illustration design" loading="lazy" />
+            <img src={designImage} alt="" loading="lazy" />
           </div>
         </section>
 

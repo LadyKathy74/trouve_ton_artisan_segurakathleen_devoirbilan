@@ -25,13 +25,19 @@
   padding: 50px;
   color: $gray-dark;
 
+  /* Images spécifiques */
   .privacy-image,
   .accessibilite-image,
   .cookies-image,
   .mentions-legales-image {
     max-width: 400px;
+    width: 100%; /* Sécurité pour les petits écrans */
     height: auto;
     margin-bottom: 30px;
+
+    @include respond-to(md) {
+      max-width: 70%;
+    }
   }
 
   h1 {
@@ -45,38 +51,22 @@
     line-height: 1.5;
   }
 
+  /* Notes de bas de page */
   .privacy-note,
   .accessibilite-note,
   .cookies-note,
   .mentions-legales-note {
     margin-top: 20px;
     font-style: italic;
-    color: $blue-primary; 
+    color: $blue-primary;
   }
-}
 
-/* Responsive */
-@include respond-to(md) {
-  .privacy-content,
-  .accessibilite-content,
-  .cookies-content,
-  .mentions-legales-content {
+  /* Responsive global du contenu */
+  @include respond-to(md) {
     padding: 30px;
-
-    .privacy-image,
-    .accessibilite-image,
-    .cookies-image,
-    .mentions-legales-image {
-      max-width: 70%;
-    }
   }
-}
 
-@include respond-to(sm) {
-  .privacy-content,
-  .accessibilite-content,
-  .cookies-content,
-  .mentions-legales-content {
+  @include respond-to(sm) {
     padding: 20px;
 
     h1 {

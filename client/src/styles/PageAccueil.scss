@@ -5,8 +5,14 @@
    🌐 PAGE ACCUEIL — Structure globale
 ============================================= */
 .page-accueil {
+  @include flex-column;
+  min-height: 100vh;
+  background-color: $blue-light;
+  font-family: $font-family-base;
+
   &__main {
     @include container(1200px, 2rem);
+    flex: 1;
   }
 
   /* =============================================
@@ -33,7 +39,7 @@
           position: absolute;
           left: 0;
           bottom: -10px;
-          width: 3cm;
+          width: 100px;
           height: 4px;
           background: $green-light;
           border-radius: 2px;
@@ -69,7 +75,7 @@
 
     /* Image */
     &-image {
-      flex: 0 0 600px;
+      flex: 0 1 600px; // Permet à l'image de rétrécir si nécessaire
 
       img {
         max-width: 100%;
@@ -95,7 +101,7 @@
         position: absolute;
         left: 0;
         bottom: -8px;
-        width: 3cm;
+        width: 100px;
         height: 4px;
         background: $red-accent;
         border-radius: 2px;
@@ -117,15 +123,13 @@
         height: 100%;
       }
     }
-  }
-}
 
-/* =============================================
-   📱 RESPONSIVE — TABLETTE ≤ 1024px
-============================================= */
-@include respond-to(lg) {
-  .page-accueil__intro-image {
-    flex: 0 0 600px;
+    .page-accueil__artisan-link {
+      text-decoration: none; // Annule le soulignement par défaut des liens
+      color: inherit;
+      display: block;
+      height: 100%;
+    }
   }
 }
 
@@ -149,7 +153,7 @@
 
   .page-accueil__title::after,
   .page-accueil__subtitle::after {
-    width: min(3cm, 40%);
+    width: 40%;
   }
 
   .page-accueil__artisan-list {
@@ -171,6 +175,6 @@
 
   .page-accueil__title::after,
   .page-accueil__subtitle::after {
-    width: min(3cm, 50%);
+    width: 50%;
   }
 }

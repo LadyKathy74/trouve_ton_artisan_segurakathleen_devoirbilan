@@ -19,7 +19,7 @@ export default function Header() {
 
   const closeMenu = () => setMenuOpen(false);
 
-  const searchFormContent = (
+  const renderSearchForm = () => (
     <>
       <input
         type="text"
@@ -56,7 +56,7 @@ export default function Header() {
       </button>
 
       {/* MENU SLIDE */}
-      <nav className={`nav-menu ${menuOpen ? "open" : ""}`} aria-hidden={!menuOpen}>
+      <nav className={`nav-menu ${menuOpen ? "open" : ""}`}>
         
         {/* Liens */}
         <ul className="nav-links">
@@ -69,12 +69,12 @@ export default function Header() {
 
         {/* Recherche desktop/tablette - Le contenu est partagé avec la version mobile */}
         <form className="search-dt" onSubmit={handleSearch}>
-          {searchFormContent}
+          {renderSearchForm()}
         </form>
 
         {/* Recherche mobile - Le contenu est partagé avec la version desktop */}
         <form className="search-mobile" onSubmit={handleSearch}>
-          {searchFormContent}
+          {renderSearchForm()}
         </form>
       </nav>
     </header>

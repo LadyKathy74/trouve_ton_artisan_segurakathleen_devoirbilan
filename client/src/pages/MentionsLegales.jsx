@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 import constructionImage from "../assets/images/en-construction.png";
 import "../styles/_en-construction.scss";
 
-const MentionsLegales = () => {
+export default function MentionsLegales() {
   return (
     <div className="mentions-legales-page">
       <Header />
@@ -32,6 +32,4 @@ const MentionsLegales = () => {
       <Footer />
     </div>
   );
-};
-
-export default MentionsLegales;
+}

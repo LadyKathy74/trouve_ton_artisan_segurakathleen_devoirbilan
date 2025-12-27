@@ -7,6 +7,52 @@
 $card-min-height: 150px;
 
 /* ============================================
+   PAGE LISTE (Layout)
+============================================ */
+.artisan-list-page {
+  background-color: $blue-light;
+  min-height: 100vh;
+  @include flex-column;
+  font-family: $font-family-base;
+
+  #main {
+    @include container;
+    padding-top: 40px;
+    padding-bottom: 60px;
+    flex: 1;
+  }
+}
+
+.title-with-line {
+  color: $blue-dark;
+  margin: 40px 0 30px;
+  position: relative;
+  
+  &::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: $blue-primary;
+    margin-top: 10px;
+    border-radius: 2px;
+  }
+}
+
+.artisan-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.no-results {
+  text-align: center;
+  font-size: 1.2rem;
+  color: $gray-dark;
+  margin-top: 50px;
+}
+
+/* ============================================
    ArtisanCard — Composant principal
 ============================================ */
 .artisan-card {
@@ -20,7 +66,7 @@ $card-min-height: 150px;
   padding: 18px 20px;
 
   border-radius: 14px;
-  background: $blue-light;
+  background: white; /* Contraste amélioré sur fond bleu clair */
   border: 2px solid $blue-primary;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.30);
 

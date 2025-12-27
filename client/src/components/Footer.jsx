@@ -4,7 +4,7 @@ import Logo from '../assets/images/Logo.png';
 import AraLogo from '../assets/images/ARA-Logo.png';
 import { Link } from 'react-router-dom';
 
-const Footer = () => {
+export default function Footer() {
   return (
     <footer className="footer c-footer__wrapper variant2">
       <div className="footer__content">
@@ -14,7 +14,7 @@ const Footer = () => {
           <Link to="/" aria-label="Retour à l'accueil">
             <img 
               src={Logo} 
-              alt="Trouve ton artisan" 
+              alt="Logo Trouve ton artisan" 
             />
           </Link>
         </div>
@@ -51,13 +51,11 @@ const Footer = () => {
 
         {/* Colonne 4 : Logo ARA */}
         <div className="footer__column footer__logo">
-          <a href="https://www.auvergnerhonealpes.fr/" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.auvergnerhonealpes.fr/" target="_blank" rel="noopener noreferrer" aria-label="Région Auvergne-Rhône-Alpes (s'ouvre dans un nouvel onglet)">
             <img src={AraLogo} alt="La Région Auvergne-Rhône-Alpes" />
           </a>
         </div>
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}

@@ -3,7 +3,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import '../styles/Admin.scss';
 
-const Admin = () => {
+export default function Admin() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -58,7 +58,7 @@ const Admin = () => {
                   placeholder="Ex: admin"
                 />
               </div>
-              {error && <p className="error-message">{error}</p>}
+              {error && <p className="error-message" role="alert">{error}</p>}
               <button type="submit" className="btn btn--primary">Se connecter</button>
             </form>
           </section>
@@ -77,6 +77,4 @@ const Admin = () => {
       <Footer />
     </div>
   );
-};
-
-export default Admin;
+}

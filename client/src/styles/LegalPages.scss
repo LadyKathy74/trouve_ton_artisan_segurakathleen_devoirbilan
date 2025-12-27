@@ -6,8 +6,7 @@
 // =============================================
 
 .legal-page {
-  display: flex;
-  flex-direction: column;
+  @include flex-column;
   min-height: 100vh;
   background-color: $blue-light;
   font-family: $font-family-base;
@@ -24,8 +23,13 @@
 
   .legal-image {
     max-width: 400px;
+    width: 100%;
     height: auto;
     margin-bottom: 30px;
+
+    @include respond-to(md) {
+      max-width: 70%;
+    }
   }
 
   h1 {
@@ -44,21 +48,13 @@
     font-style: italic;
     color: $blue-primary;
   }
-}
 
-/* Responsive */
-@include respond-to(md) {
-  .legal-content {
+  /* Responsive */
+  @include respond-to(md) {
     padding: 30px;
-
-    .legal-image {
-      max-width: 70%;
-    }
   }
-}
 
-@include respond-to(sm) {
-  .legal-content {
+  @include respond-to(sm) {
     padding: 20px;
 
     h1 {

@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 import constructionImage from "../assets/images/en-construction.png";
 import "../styles/_en-construction.scss";
 
-const Cookies = () => {
+export default function Cookies() {
   return (
     <div className="cookies-page">
       <Header />
@@ -31,6 +31,4 @@ const Cookies = () => {
       <Footer />
     </div>
   );
-};
-
-export default Cookies;
+}

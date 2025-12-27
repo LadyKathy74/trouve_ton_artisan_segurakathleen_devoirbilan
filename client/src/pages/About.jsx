@@ -3,7 +3,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import '../styles/About.scss';
 
-const About = () => {
+export default function About() {
   return (
     <div className="about-page">
       <Header />
@@ -68,6 +68,4 @@ const About = () => {
       <Footer />
     </div>
   );
-};
-
-export default About;
+}

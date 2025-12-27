@@ -39,7 +39,15 @@ export default function ArtisanDetail() {
     // Tu pourras envoyer la note au backend ici
   };
 
-  if (loading) return <div className="artisan-detail-page"><Header /><main className="container" style={{padding:"50px"}}>Chargement...</main><Footer /></div>;
+  if (loading) {
+    return (
+      <div className="artisan-detail-page">
+        <Header />
+        <main className="container" id="main" style={{ padding: "50px", textAlign: "center" }}>Chargement...</main>
+        <Footer />
+      </div>
+    );
+  }
 
   if (error || !artisan) {
     return (
@@ -68,9 +76,11 @@ export default function ArtisanDetail() {
           <section className="intro-section">
             <h1>{artisan.nom}</h1>
 
-            <div className="rating-display">
-              {"★".repeat(Math.round(Number(artisan.note)))}
-              {"☆".repeat(5 - Math.round(Number(artisan.note)))}
+            <div className="rating-display" role="img" aria-label={`Note : ${artisan.note} sur 5`}>
+              <span aria-hidden="true">
+                {"★".repeat(Math.round(Number(artisan.note)))}
+                {"☆".repeat(5 - Math.round(Number(artisan.note)))}
+              </span>
             </div>
 
             <p><strong>Spécialité :</strong> {artisan.Specialite?.nom_specialite}</p>
@@ -85,6 +95,7 @@ export default function ArtisanDetail() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="website-link"
+                aria-label="Visiter le site web (s'ouvre dans un nouvel onglet)"
               >
                 Visiter le site web
               </a>
@@ -137,6 +148,7 @@ export default function ArtisanDetail() {
 
         {/* Utilisation de navigate(-1) pour revenir à la page précédente (catégorie ou recherche) */}
         <button 
+          type="button"
           onClick={() => navigate(-1)} 
           className="back-link" 
           style={{background: 'none', border: 'none', cursor: 'pointer', padding: 0, font: 'inherit', textDecoration: 'underline'}}>

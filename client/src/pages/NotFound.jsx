@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 import errorImage from "../assets/images/404.png";
 import "../styles/NotFound.scss";
 
-const NotFound = () => {
+export default function NotFound() {
   return (
     <div className="not-found-page">
       <Header />
@@ -31,6 +31,4 @@ const NotFound = () => {
       <Footer />
     </div>
   );
-};
-
-export default NotFound;
+}

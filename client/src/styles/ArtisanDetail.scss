@@ -2,13 +2,21 @@
 @import './_mixins';
 
 // Couleur par défaut pour les étoiles si non définie dans _variables
-$star-color: #ffd700 !default;
+$star-color: #ffc403 !default;
 
 /* =============================================
    🌐 LAYOUT GLOBAL
 ============================================= */
 
+.artisan-detail-page {
+  background-color: $blue-light;
+  min-height: 100vh;
+  @include flex-column;
+  font-family: $font-family-base;
+}
+
 .artisan-detail-content {
+  flex: 1;
   max-width: 900px;
   margin: 0 auto;
   padding: 40px;
@@ -175,5 +183,21 @@ $star-color: #ffd700 !default;
       margin: 8px auto 0;
       border-radius: 2px;
     }
+  }
+}
+
+/* =============================================
+   🔙 LIENS RETOUR
+============================================= */
+.back-link {
+  display: inline-block;
+  margin-top: 15px;
+  color: $blue-dark;
+  text-decoration: underline;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    color: $blue-primary;
   }
 }
