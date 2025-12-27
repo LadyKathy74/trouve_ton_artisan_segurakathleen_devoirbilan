@@ -1,0 +1,179 @@
+@import './_variables';
+@import './_mixins';
+
+// Couleur par défaut pour les étoiles si non définie dans _variables
+$star-color: #ffd700 !default;
+
+/* =============================================
+   🌐 LAYOUT GLOBAL
+============================================= */
+
+.artisan-detail-content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px;
+
+  @include respond-to(sm) {
+    padding: 20px;
+  }
+}
+
+.artisan-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 40px;
+
+  @include respond-to(md) {
+    gap: 30px;
+  }
+
+  @include respond-to(sm) {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+}
+
+/* =============================================
+   🧩 COLONNE 1 — Infos artisan
+============================================= */
+
+.intro-section {
+  @include font-base;
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: $blue-dark;
+    margin-bottom: 10px;
+    position: relative;
+
+    &::after {
+      content: "";
+      display: block;
+      width: 80px;
+      height: 4px;
+      background-color: $green-light;
+      margin-top: 8px;
+      border-radius: 2px;
+    }
+  }
+
+  .rating-display {
+    font-size: 1.5rem;
+    color: $star-color;
+    margin-bottom: 10px;
+  }
+
+  p {
+    margin-bottom: 8px;
+    line-height: 1.5;
+    color: $gray-dark;
+  }
+
+  .website-link {
+    @include button-style($blue-primary, white);
+    margin-top: 15px;
+    display: inline-block;
+  }
+}
+
+/* =============================================
+   🧩 COLONNE 2 — Image + notation
+============================================= */
+
+.side-section {
+  @include flex-column(20px);
+  align-items: center;
+}
+
+.artisan-image-circle {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 5px solid $blue-primary;
+  @include flex-center;
+  overflow: hidden;
+  background: $blue-light;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+/* =============================================
+   ⭐ NOTATION
+============================================= */
+
+.rating-section {
+  text-align: center;
+
+  h2 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: $blue-dark;
+    position: relative;
+
+    &::after {
+      content: "";
+      display: block;
+      width: 80px;
+      height: 2px;
+      background-color: $green-light;
+      margin: 8px auto 0;
+      border-radius: 2px;
+    }
+  }
+
+  .stars {
+    font-size: 2rem;
+
+    .star {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: inherit;
+      color: $gray-light;
+      @include transition(color 0.2s ease);
+
+      &.filled,
+      &:hover {
+        color: $star-color;
+      }
+    }
+  }
+
+  .rating-message {
+    margin-top: 10px;
+    color: $blue-dark;
+    font-weight: 600;
+  }
+}
+
+/* =============================================
+   📩 FORMULAIRE DE CONTACT
+============================================= */
+
+.contact-section {
+  margin-top: 40px;
+
+  h2 {
+    text-align: center;
+    font-size: 1.5rem;
+    color: $blue-dark;
+    margin-bottom: 20px;
+    position: relative;
+
+    &::after {
+      content: "";
+      display: block;
+      width: 80px;
+      height: 2px;
+      background-color: $green-light;
+      margin: 8px auto 0;
+      border-radius: 2px;
+    }
+  }
+}

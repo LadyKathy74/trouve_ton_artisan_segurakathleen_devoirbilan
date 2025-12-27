@@ -1,0 +1,92 @@
+@import "./_variables.scss";
+@import "./_mixins.scss";
+
+/* =============================================
+   PAGE ADMIN
+============================================= */
+.admin-page {
+  background-color: $blue-light;
+  min-height: 100vh;
+  @include flex-column;
+}
+
+/* =============================================
+   CONTENU CENTRAL
+============================================= */
+.admin-content {
+  max-width: 800px;
+  margin: 60px auto;
+  padding: 0 20px;
+  flex: 1;
+
+  h1 {
+    text-align: center;
+    color: $blue-dark;
+    margin-bottom: 40px;
+  }
+}
+
+/* =============================================
+   BLOCS (login + dashboard)
+============================================= */
+.login-section,
+.dashboard-section {
+  background: white;
+  padding: 40px;
+  border-radius: 10px;
+  border-top: 5px solid $blue-primary;
+  @include shadow-soft;
+}
+
+/* =============================================
+   FORMULAIRE DE LOGIN
+============================================= */
+.login-form {
+  max-width: 400px;
+  margin: 0 auto;
+
+  .form-group {
+    margin-bottom: 20px;
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: $gray-dark;
+      font-weight: 500;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid $gray-light;
+      border-radius: 5px;
+      font-size: 1rem;
+      @include transition(border-color);
+
+      &:focus {
+        border-color: $blue-primary;
+        outline: none;
+      }
+    }
+  }
+
+  .error-message {
+    color: $red-accent;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+  }
+
+  button {
+    width: 100%;
+  }
+}
+
+/* =============================================
+   DASHBOARD HEADER
+============================================= */
+.dashboard-header {
+  @include flex-between;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid $gray-light;
+}

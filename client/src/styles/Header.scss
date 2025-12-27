@@ -1,0 +1,233 @@
+@import './_variables';
+@import './_mixins';
+
+/* =============================================
+   🌐 HEADER — Structure globale
+============================================= */
+
+.header {
+  @include flex-between;
+  padding: 15px 25px;
+  background-color: $blue-light;
+  border-bottom: 1px solid lighten($gray-dark, 60%);
+  position: relative;
+
+  /* =============================================
+     LOGO
+  ============================================== */
+  .logo {
+    @include flex-center;
+
+    .logo-img {
+      height: 100px;
+      width: auto;
+    }
+  }
+
+  /* =============================================
+     BARRE DE RECHERCHE DESKTOP
+  ============================================== */
+  .search-dt {
+    @include flex-row(8px);
+    margin-left: auto;
+
+    input.form-control {
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: 2px solid $blue-dark;
+    }
+
+    button {
+      @include transition(all 0.3s ease);
+      border-radius: 20px;
+      padding: 6px 12px;
+      background: linear-gradient(145deg, $blue-primary, darken($blue-primary, 12%));
+      color: $blue-light;
+      border: none;
+      cursor: pointer;
+      box-shadow: 4px 4px 8px rgba(0,0,0,0.25), -4px -4px 8px rgba(255,255,255,0.15);
+
+      &:hover {
+        background: linear-gradient(145deg, darken($blue-primary, 12%), $blue-primary);
+        transform: translateY(-2px);
+        box-shadow: 6px 6px 12px rgba(0,0,0,0.3), -6px -6px 12px rgba(255,255,255,0.2);
+      }
+
+      &:active {
+        transform: translateY(1px);
+        box-shadow: inset 2px 2px 6px rgba(0,0,0,0.3);
+      }
+    }
+  }
+
+  /* =============================================
+     HAMBURGER
+  ============================================== */
+  .hamburger {
+    display: none;
+    @include flex-column(5px);
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 999;
+
+    span {
+      width: 28px;
+      height: 3px;
+      background: $blue-primary;
+      border-radius: 3px;
+      @include transition(0.3s ease);
+    }
+
+    &.open {
+      span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+      span:nth-child(2) { opacity: 0; }
+      span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+    }
+  }
+
+  /* =============================================
+     MENU DESKTOP
+  ============================================== */
+  .nav-menu {
+    flex: 1;
+    @include flex-center;
+    gap: 25px;
+
+    .nav-links {
+      @include flex-row(20px);
+      list-style: none;
+      margin: 0 auto;
+
+      li a {
+        @include flex-center;
+        width: 150px;
+        padding: 10px 0;
+        border-radius: 25px;
+        font-weight: 500;
+        text-decoration: none;
+        color: $blue-light;
+        background: linear-gradient(145deg, $blue-primary, darken($blue-primary, 12%));
+        box-shadow: 4px 4px 8px rgba(0,0,0,0.25), -4px -4px 8px rgba(255,255,255,0.15);
+        @include transition(0.3s ease);
+
+        &:hover {
+          background: linear-gradient(145deg, darken($blue-primary, 12%), $blue-primary);
+          transform: translateY(-2px);
+          box-shadow: 6px 6px 12px rgba(0,0,0,0.3), -6px -6px 12px rgba(255,255,255,0.2);
+        }
+
+        &:active {
+          transform: translateY(1px);
+          box-shadow: inset 2px 2px 6px rgba(0,0,0,0.3);
+        }
+      }
+    }
+  }
+
+  /* =============================================
+     RECHERCHE MOBILE
+  ============================================== */
+  .search-mobile {
+    display: none;
+    width: 100%;
+    margin-top: 20px;
+
+    input {
+      width: 100%;
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: 2px solid $blue-dark;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 10px;
+      padding: 8px;
+      border-radius: 20px;
+      background: linear-gradient(145deg, $blue-primary, darken($blue-primary, 12%));
+      color: $blue-light;
+      border: none;
+      @include transition(0.3s ease);
+      box-shadow: 4px 4px 8px rgba(0,0,0,0.25), -4px -4px 8px rgba(255,255,255,0.15);
+
+      &:hover {
+        background: linear-gradient(145deg, darken($blue-primary, 12%), $blue-primary);
+        transform: translateY(-2px);
+        box-shadow: 6px 6px 12px rgba(0,0,0,0.3), -6px -6px 12px rgba(255,255,255,0.2);
+      }
+
+      &:active {
+        transform: translateY(1px);
+        box-shadow: inset 2px 2px 6px rgba(0,0,0,0.3);
+      }
+    }
+  }
+}
+
+/* =============================================
+   📱 TABLETTE ≤1024px
+============================================= */
+@include respond-to(lg) {
+  .header {
+    .hamburger {
+      display: flex;
+    }
+
+    .search-dt {
+      display: flex;
+      margin-left: auto;
+    }
+
+    .nav-menu {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      width: 70%;
+      background: white;
+      @include flex-column(20px);
+      align-items: flex-start;
+      padding: 20px;
+      border-left: 1px solid lighten($gray-dark, 60%);
+      border-bottom: 1px solid lighten($gray-dark, 60%);
+      transform: translateX(100%);
+      opacity: 0;
+      pointer-events: none;
+      @include transition(0.35s ease);
+      z-index: 998;
+
+      &.open {
+        transform: translateX(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .nav-links {
+        @include flex-column(15px);
+        width: 100%;
+
+        li a {
+          width: 100%;
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+
+/* =============================================
+   📱 MOBILE ≤768px
+============================================= */
+@include respond-to(md) {
+  .header {
+    .search-dt {
+      display: none;
+    }
+
+    .nav-menu {
+      .search-mobile {
+        display: block;
+      }
+    }
+  }
+}

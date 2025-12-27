@@ -1,0 +1,54 @@
+@import './_variables.scss';
+@import './_mixins.scss';
+
+/* =============================================
+   🔍 SEARCH ARTISAN — Barre de filtres
+============================================= */
+.search-artisan {
+  @include flex-row(1rem);
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 2rem;
+
+  /* Champs de saisie */
+  input,
+  select {
+    padding: 10px 14px;
+    border: 1px solid $gray-light;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: $font-family-base;
+    background: white;
+    min-width: 180px;
+    @include transition(border-color 0.2s ease);
+
+    &:focus {
+      border-color: $blue-primary;
+      outline: none;
+    }
+  }
+
+  /* Boutons */
+  .btn-primary {
+    @include button-style($blue-primary, white);
+  }
+
+  .btn-secondary {
+    @include button-style($gray-dark, white);
+  }
+}
+/* =============================================
+   🔍 SEARCH ARTISAN — Responsive
+============================================= */
+@include respond-to(md) {
+  .search-artisan {
+    flex-direction: column;
+    align-items: center;
+
+    input,
+    select {
+      width: 100%;
+      max-width: 300px;
+    }
+  }
+}

@@ -1,25 +1,56 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.js
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
-function App() {
+/* Pages */
+import PageAccueil from "./pages/PageAccueil";
+import ArtisanList from "./pages/ArtisanList";
+import ArtisanDetail from "./pages/ArtisanDetail";
+import MentionsLegales from "./pages/MentionsLegales";
+import Accessibilite from "./pages/Accessibilite";
+import Privacy from "./pages/Privacy";
+import Cookies from "./pages/Cookies";
+import About from "./pages/About";
+import Admin from "./pages/Admin";
+import NotFound from "./pages/NotFound";
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+
+        {/* Accueil */}
+        <Route path="/" element={<PageAccueil />} />
+        <Route path="/accueil" element={<Navigate to="/" replace />} />
+
+        {/* Liste des artisans */}
+        <Route path="/artisans" element={<ArtisanList />} />
+
+        {/* Catégories */}
+        <Route path="/batiment" element={<ArtisanList />} />
+        <Route path="/services" element={<ArtisanList />} />
+        <Route path="/fabrication" element={<ArtisanList />} />
+        <Route path="/alimentation" element={<ArtisanList />} />
+
+        {/* Fiche artisan */}
+        <Route path="/artisans/:id" element={<ArtisanDetail />} />
+
+        {/* Pages légales */}
+        <Route path="/mentions-legales" element={<MentionsLegales />} />
+        <Route path="/donnees-personnelles" element={<Privacy />} />
+        <Route path="/accessibilite" element={<Accessibilite />} />
+        <Route path="/cookies" element={<Cookies />} />
+
+        {/* À propos */}
+        <Route path="/a-propos" element={<About />} />
+
+        {/* Administration */}
+        <Route path="/admin" element={<Admin />} />
+
+        {/* 404 */}
+        <Route path="*" element={<NotFound />} />
+
+      </Routes>
+    </Router>
   );
 }
-
-export default App;

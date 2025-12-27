@@ -1,0 +1,176 @@
+@import './_variables';
+@import './_mixins';
+
+/* =============================================
+   🌐 PAGE ACCUEIL — Structure globale
+============================================= */
+.page-accueil {
+  &__main {
+    @include container(1200px, 2rem);
+  }
+
+  /* =============================================
+     🧩 INTRO
+  ============================================== */
+  &__intro {
+    @include flex-row(2rem);
+    align-items: center;
+    margin-bottom: 2.5rem;
+
+    /* Texte */
+    &-text {
+      flex: 1;
+
+      .page-accueil__title {
+        margin: 0 0 0.5rem 0;
+        font-size: 2rem;
+        line-height: 1.1;
+        color: $blue-dark;
+        position: relative;
+
+        &::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          bottom: -10px;
+          width: 3cm;
+          height: 4px;
+          background: $green-light;
+          border-radius: 2px;
+        }
+      }
+
+      /* Étapes numérotées */
+      .page-accueil__steps {
+        list-style: none;
+        counter-reset: step;
+        margin: 2.5rem 0 0 1.25rem;
+        color: $gray-dark;
+
+        li {
+          counter-increment: step;
+          margin-bottom: 0.75rem;
+          @include flex-row(0.5rem);
+          align-items: center;
+
+          &::before {
+            content: counter(step);
+            background-color: $blue-primary;
+            color: white;
+            border-radius: 50%;
+            width: 1.5rem;
+            height: 1.5rem;
+            @include flex-center;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+
+    /* Image */
+    &-image {
+      flex: 0 0 600px;
+
+      img {
+        max-width: 100%;
+        display: block;
+      }
+    }
+  }
+
+  /* =============================================
+     ⭐ ARTISANS DU MOIS
+  ============================================== */
+  &__featured {
+    margin-top: 2.5rem;
+
+    .page-accueil__subtitle {
+      margin: 0 0 3rem 0;
+      font-size: 1.5rem;
+      color: $blue-dark;
+      position: relative;
+
+      &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -8px;
+        width: 3cm;
+        height: 4px;
+        background: $red-accent;
+        border-radius: 2px;
+      }
+    }
+
+    .page-accueil__artisan-list {
+      @include grid-auto(260px, 3rem);
+      margin-top: 1rem;
+      justify-items: center;
+      align-items: stretch;
+    }
+
+    .page-accueil__artisan-item {
+      display: flex;
+      align-items: stretch;
+
+      .artisan-card {
+        height: 100%;
+      }
+    }
+  }
+}
+
+/* =============================================
+   📱 RESPONSIVE — TABLETTE ≤ 1024px
+============================================= */
+@include respond-to(lg) {
+  .page-accueil__intro-image {
+    flex: 0 0 600px;
+  }
+}
+
+/* =============================================
+   📱 RESPONSIVE — MOBILE ≤ 768px
+============================================= */
+@include respond-to(md) {
+  .page-accueil__intro {
+    flex-direction: column;
+    align-items: stretch;
+
+    &-text {
+      order: 1;
+    }
+
+    &-image {
+      order: 2;
+      width: 100%;
+    }
+  }
+
+  .page-accueil__title::after,
+  .page-accueil__subtitle::after {
+    width: min(3cm, 40%);
+  }
+
+  .page-accueil__artisan-list {
+    gap: 0.75rem;
+  }
+}
+
+/* =============================================
+   📱 RESPONSIVE — PETIT MOBILE ≤ 576px
+============================================= */
+@include respond-to(sm) {
+  .page-accueil__title {
+    font-size: 1.5rem;
+  }
+
+  .page-accueil__subtitle {
+    font-size: 1.125rem;
+  }
+
+  .page-accueil__title::after,
+  .page-accueil__subtitle::after {
+    width: min(3cm, 50%);
+  }
+}

@@ -1,0 +1,65 @@
+@import './_variables';
+@import './_mixins';
+
+/* =============================================
+   🌐 PAGE 404 — Structure générale
+============================================= */
+.not-found-page {
+  background-color: $blue-light;
+  min-height: 100vh;
+  @include flex-column;
+  font-family: $font-family-base;
+}
+
+/* =============================================
+   📦 CONTENU CENTRAL
+============================================= */
+.not-found-content {
+  flex: 1;
+  @include flex-column(30px);
+  align-items: center;
+  justify-content: center;
+  padding: 50px 20px;
+  text-align: center;
+  color: $gray-dark;
+
+  .not-found-image {
+    max-width: 500px;
+    width: 100%;
+    height: auto;
+  }
+
+  h1 {
+    color: $blue-primary;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin-bottom: 30px;
+    line-height: 1.5;
+  }
+
+  .home-button {
+    @include button-style($blue-primary, white);
+    display: inline-block;
+    text-decoration: none;
+  }
+}
+
+/* =============================================
+   📱 RESPONSIVE
+============================================= */
+@include respond-to(md) {
+  .not-found-content {
+    h1 {
+      font-size: 2rem;
+    }
+
+    .not-found-image {
+      max-width: 80%;
+    }
+  }
+}

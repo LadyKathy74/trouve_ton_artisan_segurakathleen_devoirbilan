@@ -1,10 +1,11 @@
 @import './_variables';
 @import './_mixins';
 
-.privacy-page,
-.accessibilite-page,
-.cookies-page,
-.mentions-legales-page {
+// =============================================
+// 🌐 PAGES LÉGALES (Privacy, Accessibilité, Cookies, Mentions légales)
+// =============================================
+
+.legal-page {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -12,23 +13,16 @@
   font-family: $font-family-base;
 }
 
-.privacy-content,
-.accessibilite-content,
-.cookies-content,
-.mentions-legales-content {
+.legal-content {
   flex: 1;
-  display: flex;
-  flex-direction: column;
+  @include flex-column(20px);
   align-items: center;
   justify-content: center;
   text-align: center;
   padding: 50px;
   color: $gray-dark;
 
-  .privacy-image,
-  .accessibilite-image,
-  .cookies-image,
-  .mentions-legales-image {
+  .legal-image {
     max-width: 400px;
     height: auto;
     margin-bottom: 30px;
@@ -45,38 +39,26 @@
     line-height: 1.5;
   }
 
-  .privacy-note,
-  .accessibilite-note,
-  .cookies-note,
-  .mentions-legales-note {
+  .legal-note {
     margin-top: 20px;
     font-style: italic;
-    color: $blue-primary; 
+    color: $blue-primary;
   }
 }
 
 /* Responsive */
 @include respond-to(md) {
-  .privacy-content,
-  .accessibilite-content,
-  .cookies-content,
-  .mentions-legales-content {
+  .legal-content {
     padding: 30px;
 
-    .privacy-image,
-    .accessibilite-image,
-    .cookies-image,
-    .mentions-legales-image {
+    .legal-image {
       max-width: 70%;
     }
   }
 }
 
 @include respond-to(sm) {
-  .privacy-content,
-  .accessibilite-content,
-  .cookies-content,
-  .mentions-legales-content {
+  .legal-content {
     padding: 20px;
 
     h1 {
