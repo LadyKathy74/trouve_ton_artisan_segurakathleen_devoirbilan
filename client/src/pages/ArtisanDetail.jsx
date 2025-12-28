@@ -7,7 +7,7 @@ import ContactForm from "../components/ContactForm";
 import { artisansData } from "../assets/data/artisansData";
 import "../styles/ArtisanDetail.scss";
 
-const API_URL = (process.env.REACT_APP_API_URL || "http://localhost:3002").replace(/\/$/, "");
+const API_URL = (process.env.REACT_APP_API_URL || "http://localhost:3005").replace(/\/$/, "");
 
 export default function ArtisanDetail() {
   const { id } = useParams();
@@ -43,7 +43,7 @@ export default function ArtisanDetail() {
       })
       .catch(() => {
         // Fallback sur les données statiques
-        const found = artisansData.find(a => a.id === id);
+        const found = artisansData.find(a => String(a.id) === id);
         if (found) {
           setArtisan({
             ...found,

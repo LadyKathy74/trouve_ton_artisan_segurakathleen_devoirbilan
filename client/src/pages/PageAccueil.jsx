@@ -10,7 +10,7 @@ import { artisansData } from "../assets/data/artisansData";
 import designImage from "../assets/images/Design.png";
 import "../styles/PageAccueil.scss";
 
-const API_URL = (process.env.REACT_APP_API_URL || "http://localhost:3002").replace(/\/$/, "");
+const API_URL = (process.env.REACT_APP_API_URL || "http://localhost:3005").replace(/\/$/, "");
 
 export default function PageAccueil() {
   const [artisansDuMois, setArtisansDuMois] = useState([]);
