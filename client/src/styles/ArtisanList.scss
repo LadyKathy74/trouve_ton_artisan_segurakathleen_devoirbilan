@@ -45,6 +45,49 @@
     text-decoration: none;
     color: inherit;
   }
+
+  /* --- Pagination Personnalisée --- */
+  .pagination {
+    margin-top: 2rem;
+    gap: 5px; /* Espace entre les boutons */
+    align-items: center;
+
+    .page-item {
+      /* Style des liens (boutons) */
+      .page-link {
+        color: $blue-dark;
+        background-color: white;
+        border: 1px solid #dee2e6;
+        border-radius: 6px; /* Coins arrondis */
+        padding: 0.5rem 1rem;
+        font-weight: 500;
+        transition: all 0.2s ease-in-out;
+
+        &:hover {
+          background-color: $blue-light;
+          color: $blue-primary;
+          border-color: $blue-primary;
+        }
+      }
+
+      /* Style de la page active */
+      &.active .page-link {
+        background-color: $blue-primary;
+        border-color: $blue-primary;
+        color: white;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Style des boutons désactivés */
+      &.disabled .page-link {
+        color: $gray-light;
+        background-color: #f8f9fa;
+        border-color: #dee2e6;
+        cursor: not-allowed;
+        opacity: 0.6;
+      }
+    }
+  }
 }
 
 /* 📱 Responsive */
