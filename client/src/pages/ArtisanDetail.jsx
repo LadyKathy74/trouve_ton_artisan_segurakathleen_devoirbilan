@@ -7,7 +7,7 @@ import ContactForm from "../components/ContactForm";
 import { artisansData } from "../assets/data/artisansData";
 import "../styles/ArtisanDetail.scss";
 
-const API_URL = (process.env.REACT_APP_API_URL || "http://localhost:3005").replace(/\/$/, "");
+const API_URL = (process.env.REACT_APP_API_URL || "http://localhost:3006").replace(/\/$/, "");
 
 export default function ArtisanDetail() {
   const { id } = useParams();

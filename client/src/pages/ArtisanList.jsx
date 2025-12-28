@@ -7,7 +7,7 @@ import ArtisanCard from "../components/ArtisanCard";
 import { artisansData } from "../assets/data/artisansData";
 import "../styles/ArtisanList.scss";
 
-const API_URL = (process.env.REACT_APP_API_URL || "http://localhost:3005").replace(/\/$/, "");
+const API_URL = (process.env.REACT_APP_API_URL || "http://localhost:3006").replace(/\/$/, "");
 
 // Helper pour déterminer la catégorie selon l'URL
 const getCategoryFromPath = (path) => {

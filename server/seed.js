@@ -58,8 +58,8 @@ const seedDatabase = async () => {
         await sequelize.sync({ force: true });
         console.log('Table "artisans" réinitialisée.');
 
-        // Lecture du fichier JSON (situé dans le dossier parent)
-        const jsonPath = path.join(__dirname, '../artisans.json');
+        // Lecture du fichier JSON (situé dans le même dossier server)
+        const jsonPath = path.join(__dirname, 'artisans.json');
         
         if (!fs.existsSync(jsonPath)) {
             throw new Error(`Fichier introuvable : ${jsonPath}`);
