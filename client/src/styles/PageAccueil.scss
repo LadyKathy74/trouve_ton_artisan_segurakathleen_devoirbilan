@@ -75,7 +75,7 @@
 
     /* Image */
     &-image {
-      flex: 0 1 800px; // Permet à l'image de rétrécir si nécessaire
+      flex: 0 1 600px; // Permet à l'image de rétrécir si nécessaire
 
       img {
         max-width: 100%;
@@ -140,6 +140,7 @@
   .page-accueil__intro {
     flex-direction: column;
     align-items: stretch;
+    margin-bottom: 1.5rem;
 
     &-text {
       order: 1;
@@ -149,6 +150,10 @@
       order: 2;
       width: 100%;
     }
+  }
+
+  .page-accueil__featured {
+    margin-top: 1rem;
   }
 
   .page-accueil__title::after,
