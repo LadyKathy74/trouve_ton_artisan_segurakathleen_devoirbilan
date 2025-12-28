@@ -4,9 +4,10 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import ContactForm from "../components/ContactForm";
+import { artisansData } from "../assets/data/artisansData";
 import "../styles/ArtisanDetail.scss";
 
-const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3001";
+const API_URL = (process.env.REACT_APP_API_URL || "http://localhost:3002").replace(/\/$/, "");
 
 export default function ArtisanDetail() {
   const { id } = useParams();
@@ -25,11 +26,39 @@ export default function ArtisanDetail() {
         return res.json();
       })
       .then((data) => {
-        setArtisan(data);
+        // Normalisation de l'image pour l'API
+        const normalizedData = {
+          ...data,
+          nom: data.nom || data.name,
+          note: data.note || data.rating,
+          ville: data.ville || data.location,
+          a_propos: data.a_propos || data.description,
+          nom_specialite: data.Specialite?.nom_specialite || data.nom_specialite || data.specialty,
+          categorie: data.Specialite?.Categorie?.nom_categorie || data.categorie || data.category,
+          site_web: data.site_web || data.website,
+          image: data.image ? `${API_URL}/images/${data.image}` : null
+        };
+        setArtisan(normalizedData);
         setLoading(false);
       })
       .catch(() => {
-        setError(true);
+        // Fallback sur les données statiques
+        const found = artisansData.find(a => a.id === id);
+        if (found) {
+          setArtisan({
+            ...found,
+            nom: found.name,
+            note: found.rating,
+            ville: found.location,
+            a_propos: found.description,
+            nom_specialite: found.specialty,
+            categorie: found.category,
+            site_web: found.website,
+            // image est déjà correct dans artisansData (import)
+          });
+        } else {
+          setError(true);
+        }
         setLoading(false);
       });
   }, [id]);
@@ -81,10 +110,11 @@ export default function ArtisanDetail() {
                 {"★".repeat(Math.round(Number(artisan.note)))}
                 {"☆".repeat(5 - Math.round(Number(artisan.note)))}
               </span>
+              <span className="rating-value">{artisan.note} / 5</span>
             </div>
 
-            <p><strong>Spécialité :</strong> {artisan.Specialite?.nom_specialite}</p>
-            <p><strong>Catégorie :</strong> {artisan.Specialite?.Categorie?.nom_categorie}</p>
+            <p><strong>Spécialité :</strong> {artisan.Specialite?.nom_specialite || artisan.nom_specialite}</p>
+            <p><strong>Catégorie :</strong> {artisan.Specialite?.Categorie?.nom_categorie || artisan.categorie || artisan.nom_categorie}</p>
             <p><strong>Localisation :</strong> {artisan.ville}</p>
 
             <p className="description">{artisan.a_propos}</p>
@@ -106,9 +136,9 @@ export default function ArtisanDetail() {
           <section className="side-section">
             <div className="artisan-image-circle">
               {artisan.image && (
-                <img 
-                  src={`${API_URL}/images/${artisan.image}`} 
-                  alt={artisan.nom} 
+                <img
+                  src={artisan.image}
+                  alt={artisan.nom}
                 />
               )}
             </div>

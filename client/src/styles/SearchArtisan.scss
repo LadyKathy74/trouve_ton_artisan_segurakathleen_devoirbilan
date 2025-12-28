@@ -33,12 +33,18 @@
     @include button-style($blue-primary, white);
   }
 
-  .btn-secondary {
-    @include button-style(white, $blue-dark);
-    border: 1px solid $blue-dark;
+  .btn-light-blue {
+    @include button-style($blue-primary, $blue-light);
 
     &:hover {
-      background: darken(white, 5%);
+      background: darken($blue-light, 5%);
+    }
+  }
+
+  .btn-gray {
+    @include button-style($gray-dark, $blue-light);
+    &:hover {
+      background: darken($gray-light, 5%);
     }
   }
 }
@@ -53,7 +59,8 @@
     input,
     select,
     .btn-primary,
-    .btn-secondary {
+    .btn-light-blue,
+    .btn-gray {
       width: 100%;
       max-width: 300px;
     }

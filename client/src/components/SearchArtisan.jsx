@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import "../styles/SearchArtisan.scss";
 
-export default function SearchArtisan({ onSearch = () => {}, onShowAll = () => {} }) {
+export default function SearchArtisan({ onSearch = () => {}, onShowAll = () => {}, onReset = () => {} }) {
   const [filters, setFilters] = useState({
     name: "",
-    category: "",
+    specialty: "",
     location: "",
     rating: "",
   });
@@ -19,10 +19,22 @@ export default function SearchArtisan({ onSearch = () => {}, onShowAll = () => {
     onSearch(filters);
   };
 
-  const handleReset = () => {
+  const handleResetClick = () => {
+    // 1. Réinitialiser l'état local (les champs)
     setFilters({
       name: "",
-      category: "",
+      specialty: "",
+      location: "",
+      rating: "",
+    });
+    // 2. Demander au parent de réinitialiser (retour catégorie ou reset simple)
+    onReset();
+  };
+
+  const handleShowAllClick = () => {
+    setFilters({
+      name: "",
+      specialty: "",
       location: "",
       rating: "",
     });
@@ -42,9 +54,9 @@ export default function SearchArtisan({ onSearch = () => {}, onShowAll = () => {
 
       <input
         type="text"
-        name="category"
+        name="specialty"
         placeholder="Spécialité"
-        value={filters.category}
+        value={filters.specialty}
         onChange={handleChange}
         aria-label="Rechercher par spécialité"
       />
@@ -58,20 +70,23 @@ export default function SearchArtisan({ onSearch = () => {}, onShowAll = () => {
         aria-label="Rechercher par localisation"
       />
 
-      <select name="rating" value={filters.rating} onChange={handleChange} aria-label="Filtrer par note minimale">
-        <option value="">Note</option>
-        <option value="5">★★★★★</option>
-        <option value="4">★★★★☆</option>
-        <option value="3">★★★☆☆</option>
-        <option value="2">★★☆☆☆</option>
-        <option value="1">★☆☆☆☆</option>
+      <select 
+        name="rating" 
+        value={filters.rating} 
+        onChange={handleChange} 
+        aria-label="Filtrer par note minimale"
+      >
+        <option value="">Note minimum</option>
+        <option value="5">5 étoiles</option>
+        <option value="4">4 étoiles et +</option>
+        <option value="3">3 étoiles et +</option>
       </select>
 
       <button type="submit" className="btn-primary">Rechercher</button>
-      <button type="button" className="btn-secondary" onClick={onShowAll}>
+      <button type="button" className="btn-light-blue" onClick={handleShowAllClick}>
         Afficher tout
       </button>
-      <button type="button" className="btn-secondary" onClick={handleReset}>
+      <button type="button" className="btn-gray" onClick={handleResetClick}>
         Réinitialiser
       </button>
     </form>
@@ -81,4 +96,5 @@ export default function SearchArtisan({ onSearch = () => {}, onShowAll = () => {
 SearchArtisan.propTypes = {
   onSearch: PropTypes.func,
   onShowAll: PropTypes.func,
+  onReset: PropTypes.func,
 };

@@ -37,7 +37,6 @@ Rating.propTypes = {
 ============================================ */
 export default function ArtisanCard({
   specialty,
-  image = null,
   name,
   description = "",
   location = "",
@@ -49,14 +48,6 @@ export default function ArtisanCard({
       className={`artisan-card ${className}`.trim()}
       aria-label={`Carte artisan : ${name}`}
     >
-      {/* Image */}
-      {image && (
-        <img
-          src={image}
-          alt={name}
-          className="artisan-card__image"
-        />
-      )}
 
       {/* HEADER : note + spécialité */}
       <header className="artisan-card__header">
@@ -80,7 +71,6 @@ export default function ArtisanCard({
 
 ArtisanCard.propTypes = {
   specialty: PropTypes.string.isRequired,
-  image: PropTypes.string,
   name: PropTypes.string.isRequired,
   description: PropTypes.string,
   location: PropTypes.string,

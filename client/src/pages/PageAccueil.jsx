@@ -5,11 +5,12 @@ import { Link } from "react-router-dom";
 import Header from "../components/Header.jsx";
 import Footer from "../components/Footer.jsx";
 import ArtisanCard from "../components/ArtisanCard.jsx";
+import { artisansData } from "../assets/data/artisansData";
 
 import designImage from "../assets/images/Design.png";
 import "../styles/PageAccueil.scss";
 
-const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3002";
+const API_URL = (process.env.REACT_APP_API_URL || "http://localhost:3002").replace(/\/$/, "");
 
 export default function PageAccueil() {
   const [artisansDuMois, setArtisansDuMois] = useState([]);
@@ -32,12 +33,12 @@ export default function PageAccueil() {
         }
 
         const formatted = data.map((item) => ({
-          id: item.id_artisan,
-          name: item.nom || "",
-          rating: Number(item.note) || 0,
-          location: item.ville || "",
-          specialty: item.Specialite?.nom_specialite || item.nom_specialite || "Divers",
-          category: item.Specialite?.Categorie?.nom_categorie || item.nom_categorie || item.categorie || "",
+          id: item.id_artisan || item.id,
+          name: item.nom || item.name || "",
+          rating: Number(item.note) || Number(item.rating) || 0,
+          location: item.ville || item.location || "",
+          specialty: item.Specialite?.nom_specialite || item.nom_specialite || item.specialty || "Divers",
+          category: item.Specialite?.Categorie?.nom_categorie || item.nom_categorie || item.categorie || item.category || "",
           image: item.image ? `${API_URL}/images/${item.image}` : null,
         }));
 
@@ -46,6 +47,8 @@ export default function PageAccueil() {
         setArtisansDuMois(topArtisans);
       } catch (error) {
         console.error("Erreur lors du chargement des artisans :", error);
+        // Fallback : utilisation des données statiques si l'API échoue
+        setArtisansDuMois(artisansData.sort((a, b) => b.rating - a.rating).slice(0, 3));
       } finally {
         setLoading(false);
       }
