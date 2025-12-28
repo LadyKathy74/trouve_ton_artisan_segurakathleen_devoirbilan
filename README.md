@@ -57,7 +57,7 @@ L'application sera accessible sur http://localhost:3000.
 
 ## 🌐 Liens Utiles
 
-- **Site en ligne** : https://trouve-ton-artisan-five.vercel.app/
+- **Site en ligne** : [trouve-ton-artisan-ebon.vercel.app/](https://trouve-ton-artisan-ebon.vercel.app/)
 - **Maquettes Figma** :https://www.figma.com/design/0vDIwotZXW9X18Kfd1duEL/trouve_ton_artisan?node-id=205-427&t=kFi1UZnvlQO7YKwS-1
 ## 👤 Auteur
 Kathleen Segura - Devoir Bilan
