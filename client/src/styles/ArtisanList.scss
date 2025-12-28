@@ -48,6 +48,7 @@
 
   /* --- Pagination Personnalisée --- */
   .pagination {
+    display: flex;
     margin-top: 3rem;
     gap: 10px;
     align-items: center;
