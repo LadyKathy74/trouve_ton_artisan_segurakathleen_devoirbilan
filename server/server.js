@@ -1,6 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import path from 'path';
+import fs from 'fs';
+import multer from 'multer';
 import { fileURLToPath } from 'url';
 import { Sequelize, DataTypes } from 'sequelize';
 import dotenv from 'dotenv';
@@ -18,6 +20,23 @@ app.use(express.json());
 
 // Servir les images statiques (créez un dossier 'public' dans server et mettez vos images dedans)
 app.use('/images', express.static(path.join(__dirname, 'public')));
+
+// --- Configuration de l'Upload (Multer) ---
+const uploadDir = path.join(__dirname, 'public');
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir);
+}
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, uploadDir);
+    },
+    filename: function (req, file, cb) {
+        // On garde le nom d'origine ou on ajoute un timestamp pour éviter les doublons
+        cb(null, Date.now() + '-' + file.originalname.replace(/\s/g, '_'));
+    }
+});
+const upload = multer({ storage: storage });
 
 // --- Configuration de la Base de Données (Sequelize) ---
 
@@ -80,6 +99,56 @@ app.get('/api/artisans/:id', async (req, res) => {
         else res.status(404).json({ message: "Artisan non trouvé" });
     } catch (error) {
         res.status(500).json({ message: "Erreur serveur", error });
+    }
+});
+
+// Route : Créer un artisan
+app.post('/api/artisans', upload.single('image'), async (req, res) => {
+    try {
+        const artisanData = { ...req.body };
+        // Si un fichier est uploadé, on utilise son nom, sinon on garde ce qui est envoyé (ou rien)
+        if (req.file) {
+            artisanData.image = req.file.filename;
+        }
+        const newArtisan = await Artisan.create(artisanData);
+        res.status(201).json(newArtisan);
+    } catch (error) {
+        res.status(500).json({ message: "Erreur lors de la création", error });
+    }
+});
+
+// Route : Modifier un artisan
+app.put('/api/artisans/:id', upload.single('image'), async (req, res) => {
+    try {
+        const id = req.params.id;
+        const artisanData = { ...req.body };
+        if (req.file) {
+            artisanData.image = req.file.filename;
+        }
+        const [updated] = await Artisan.update(artisanData, { where: { id: id } });
+        if (updated) {
+            const updatedArtisan = await Artisan.findByPk(id);
+            res.json(updatedArtisan);
+        } else {
+            res.status(404).json({ message: "Artisan non trouvé" });
+        }
+    } catch (error) {
+        res.status(500).json({ message: "Erreur lors de la modification", error });
+    }
+});
+
+// Route : Supprimer un artisan
+app.delete('/api/artisans/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const deleted = await Artisan.destroy({ where: { id: id } });
+        if (deleted) {
+            res.status(204).send();
+        } else {
+            res.status(404).json({ message: "Artisan non trouvé" });
+        }
+    } catch (error) {
+        res.status(500).json({ message: "Erreur lors de la suppression", error });
     }
 });
 

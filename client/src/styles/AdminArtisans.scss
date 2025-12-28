@@ -1,0 +1,146 @@
+@import './_variables';
+@import './_mixins';
+
+.admin-page {
+  background-color: $blue-light;
+  min-height: 100vh;
+  @include flex-column;
+  font-family: $font-family-base;
+
+  .admin-container {
+    padding: 40px 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  h1 {
+    color: $blue-dark;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  h2 {
+    color: $blue-primary;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+  }
+
+  .admin-form-section {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 3rem;
+
+    .admin-form {
+      .form-row {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1rem;
+        
+        @include respond-to(sm) {
+          flex-direction: column;
+          gap: 0;
+        }
+
+        .form-group {
+          flex: 1;
+        }
+      }
+
+      .form-group {
+        margin-bottom: 1rem;
+        
+        label {
+          display: block;
+          margin-bottom: 0.5rem;
+          font-weight: 600;
+          color: $gray-dark;
+        }
+
+        input, select, textarea {
+          width: 100%;
+          padding: 0.5rem;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          font-family: inherit;
+        }
+      }
+
+      .form-actions {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1.5rem;
+
+        button {
+          padding: 0.75rem 1.5rem;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          font-weight: 600;
+          transition: background 0.3s;
+
+          &.btn-submit {
+            background-color: $blue-primary;
+            color: white;
+            &:hover { background-color: darken($blue-primary, 10%); }
+          }
+
+          &.btn-cancel {
+            background-color: #ccc;
+            color: $gray-dark;
+            &:hover { background-color: darken(#ccc, 10%); }
+          }
+        }
+      }
+    }
+  }
+
+  .admin-list-section {
+    .table-responsive {
+      overflow-x: auto;
+    }
+
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+      th, td {
+        padding: 1rem;
+        text-align: left;
+        border-bottom: 1px solid #eee;
+      }
+
+      th {
+        background-color: $blue-dark;
+        color: white;
+      }
+
+      tr:hover {
+        background-color: #f9f9f9;
+      }
+
+      .btn-edit, .btn-delete {
+        padding: 0.4rem 0.8rem;
+        margin-right: 0.5rem;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.9rem;
+      }
+
+      .btn-edit {
+        background-color: $blue-primary;
+        color: white;
+      }
+
+      .btn-delete {
+        background-color: $red-accent;
+        color: white;
+      }
+    }
+  }
+}
