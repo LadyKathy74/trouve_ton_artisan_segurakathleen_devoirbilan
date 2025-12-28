@@ -27,6 +27,8 @@ export default function ArtisanList() {
   const [artisans, setArtisans] = useState([]);
   const [pageTitle, setPageTitle] = useState("Liste des artisans");
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(6);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -36,6 +38,7 @@ export default function ArtisanList() {
 
   // 1. Charger les données
   useEffect(() => {
+    console.log("URL API utilisée :", API_URL);
     const fetchData = async () => {
       try {
         const res = await fetch(`${API_URL}/api/artisans`);
@@ -90,6 +93,7 @@ export default function ArtisanList() {
     }
     setArtisans(results);
     setPageTitle(title);
+    setCurrentPage(1); // Retour à la page 1 lors d'un changement de filtre
   }, [search, pathname, fullArtisanList, loading]);
 
   // 3. Recherche manuelle (Formulaire SearchArtisan)
@@ -113,6 +117,7 @@ export default function ArtisanList() {
 
     setArtisans(results);
     setPageTitle(`Résultats de votre recherche (${results.length})`);
+    setCurrentPage(1); // Retour à la page 1 lors d'une recherche
   }, [fullArtisanList, pathname]);
 
   // 4. Réinitialisation (Bouton Afficher tout)
@@ -151,6 +156,50 @@ export default function ArtisanList() {
     }
   }, [fullArtisanList, navigate, pathname, location.state]);
 
+  // 6. Remonter en haut de page lors du changement de page (Pagination)
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [currentPage]);
+
+  // --- Logique de Pagination ---
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = artisans.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(artisans.length / itemsPerPage);
+
+  // Fonction pour générer les numéros de page avec ellipses (...)
+  const getPageNumbers = () => {
+    // Si le nombre de pages est petit, on affiche tout
+    if (totalPages <= 7) {
+      return Array.from({ length: totalPages }, (_, i) => i + 1);
+    }
+
+    const delta = 1; // Nombre de pages à afficher autour de la page courante
+    const range = [];
+    const rangeWithDots = [];
+    let l;
+
+    for (let i = 1; i <= totalPages; i++) {
+      if (i === 1 || i === totalPages || (i >= currentPage - delta && i <= currentPage + delta)) {
+        range.push(i);
+      }
+    }
+
+    for (let i of range) {
+      if (l) {
+        if (i - l === 2) {
+          rangeWithDots.push(l + 1);
+        } else if (i - l !== 1) {
+          rangeWithDots.push('...');
+        }
+      }
+      rangeWithDots.push(i);
+      l = i;
+    }
+
+    return rangeWithDots;
+  };
+
   return (
     <div className="artisan-list-page">
       <Header />
@@ -159,11 +208,28 @@ export default function ArtisanList() {
         <SearchArtisan onSearch={handleSearch} onShowAll={handleShowAll} onReset={handleReset} />
         <h1 className="title-with-line">{pageTitle}</h1>
 
+        {/* Sélecteur du nombre d'éléments par page */}
+        <div style={{ marginBottom: "1rem", textAlign: "right" }}>
+          <label htmlFor="itemsPerPage" style={{ marginRight: "0.5rem" }}>Afficher :</label>
+          <select
+            id="itemsPerPage"
+            value={itemsPerPage}
+            onChange={(e) => {
+              setItemsPerPage(Number(e.target.value));
+              setCurrentPage(1); // Retour à la première page pour éviter les pages vides
+            }}
+          >
+            <option value={6}>6 par page</option>
+            <option value={12}>12 par page</option>
+            <option value={24}>24 par page</option>
+          </select>
+        </div>
+
         <div className="artisan-cards" role="list">
           {loading ? (
             <p>Chargement...</p>
-          ) : artisans.length > 0 ? (
-            artisans.map((artisan) => (
+          ) : currentItems.length > 0 ? (
+            currentItems.map((artisan) => (
               <Link 
                 to={`/artisans/${artisan.id}`} 
                 key={artisan.id} 
@@ -177,6 +243,43 @@ export default function ArtisanList() {
             <p className="no-results">Aucun artisan trouvé.</p>
           )}
         </div>
+
+        {/* Contrôles de Pagination */}
+        {artisans.length > itemsPerPage && (
+          <nav aria-label="Navigation des pages" style={{ marginTop: "2rem" }}>
+            <div style={{ textAlign: "center", marginBottom: "1rem", fontWeight: "bold" }}>
+              Page {currentPage} sur {totalPages}
+            </div>
+            <ul className="pagination justify-content-center">
+              <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
+                <button className="page-link" onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}>
+                  &laquo; Précédent
+                </button>
+              </li>
+              
+              {getPageNumbers().map((pageNum, index) => (
+                <li 
+                  key={index} 
+                  className={`page-item ${pageNum === currentPage ? "active" : ""} ${pageNum === "..." ? "disabled" : ""}`}
+                >
+                  <button 
+                    className="page-link" 
+                    onClick={() => typeof pageNum === "number" && setCurrentPage(pageNum)}
+                    disabled={pageNum === "..."}
+                  >
+                    {pageNum}
+                  </button>
+                </li>
+              ))}
+
+              <li className={`page-item ${currentPage === totalPages ? "disabled" : ""}`}>
+                <button className="page-link" onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}>
+                  Suivant &raquo;
+                </button>
+              </li>
+            </ul>
+          </nav>
+        )}
       </main>
 
       <Footer />

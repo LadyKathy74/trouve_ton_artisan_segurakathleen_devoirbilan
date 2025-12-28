@@ -75,7 +75,7 @@
 
     /* Image */
     &-image {
-      flex: 0 1 600px; // Permet à l'image de rétrécir si nécessaire
+      flex: 0 1 800px; // Permet à l'image de rétrécir si nécessaire
 
       img {
         max-width: 100%;
@@ -88,7 +88,7 @@
      ⭐ ARTISANS DU MOIS
   ============================================== */
   &__featured {
-    margin-top: 2.5rem;
+    margin-top: 2rem;
 
     .page-accueil__subtitle {
       margin: 0 0 3rem 0;
