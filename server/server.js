@@ -46,6 +46,16 @@ app.get('/api/artisans/:id', (req, res) => {
     else res.status(404).json({ message: "Artisan non trouvé" });
 });
 
+// Route : Formulaire de contact (Simulation)
+app.post('/api/contact', (req, res) => {
+    const { nom, email, objet, message } = req.body;
+    console.log(`[CONTACT] Nouveau message de ${nom} (${email})`);
+    console.log(`Objet: ${objet}\nMessage: ${message}`);
+    
+    // Simulation d'un envoi réussi
+    res.status(200).json({ success: true, message: "Message reçu par le serveur" });
+});
+
 app.listen(PORT, () => {
     console.log(`Serveur backend démarré sur http://localhost:${PORT}`);
 });
