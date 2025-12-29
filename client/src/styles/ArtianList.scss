@@ -45,12 +45,19 @@ $card-min-height: 150px;
   gap: 30px;
   padding: 0;
   list-style: none;
+
+  li {
+    list-style: none;
+  }
 }
 
 .items-per-page-selector {
-  margin-bottom: 4rem;
+  margin-bottom: 3rem; 
+  margin-top: 2rem;  
+  padding-bottom: 2rem;
+  border-bottom: 1px solid $gray-light;
   display: flex;
-  justify-content: flex-start;
+  justify-content: flex-end;
   align-items: center;
 
   label {
