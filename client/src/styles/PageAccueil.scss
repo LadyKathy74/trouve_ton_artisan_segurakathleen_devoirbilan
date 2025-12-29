@@ -75,10 +75,11 @@
 
     /* Image */
     &-image {
-      flex: 0 1 600px; // Permet à l'image de rétrécir si nécessaire
+      flex: 0 1 300px; // Permet à l'image de rétrécir si nécessaire
 
       img {
         max-width: 100%;
+        height: auto;
         display: block;
       }
     }
@@ -145,6 +146,12 @@
     &-text {
       order: 1;
       text-align: center;
+
+      .page-accueil__steps {
+        display: inline-block;
+        text-align: left;
+        margin: 2rem 0 0 0;
+      }
     }
 
     &-image {
@@ -162,6 +169,8 @@
   .page-accueil__title::after,
   .page-accueil__subtitle::after {
     width: 40%;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .page-accueil__artisan-list {

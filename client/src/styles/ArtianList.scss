@@ -43,6 +43,44 @@ $card-min-height: 150px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 30px;
+  padding: 0;
+  list-style: none;
+}
+
+.items-per-page-selector {
+  margin-bottom: 4rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  label {
+    margin-right: 10px;
+    font-weight: 600;
+    color: $blue-dark;
+  }
+
+  select {
+    padding: 10px 14px;
+    min-height: 44px; /* Zone tactile confortable (WCAG) */
+    border: 1px solid $gray-light;
+    border-radius: 8px;
+    background-color: white;
+    color: $blue-dark;
+    font-family: inherit;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+
+    &:focus {
+      border-color: $blue-primary;
+      box-shadow: 0 0 0 3px rgba($blue-primary, 0.15);
+    }
+  }
+
+  @include respond-to(sm) {
+    justify-content: center;
+    margin-top: 1rem;
+  }
 }
 
 .no-results {
@@ -115,7 +153,7 @@ $card-min-height: 150px;
       @include transition(color 0.12s ease);
 
       &--filled {
-        color: #ffc403;
+        color: #e69900; /* Assombri pour meilleur contraste sur blanc */
       }
     }
   }
@@ -127,7 +165,7 @@ $card-min-height: 150px;
     font-weight: 600;
     color: $gray-dark;
     background: lighten($blue-primary, 45%);
-    border: 1px solid lighten($blue-primary, 35%);
+    border: 1px solid lighten($blue-primary, 20%); /* Bordure plus visible */
     padding: 6px 10px;
     border-radius: 999px;
     font-size: 13px;
@@ -150,7 +188,7 @@ $card-min-height: 150px;
   &__description {
     margin: 0;
     font-size: 14px;
-    color: $gray-light;
+    color: $gray-dark; /* $gray-light est souvent insuffisant pour du texte 14px */
     line-height: 1.45;
     flex: 1 1 auto;
     min-height: 50px;
@@ -206,6 +244,68 @@ $card-min-height: 150px;
 
     &__description {
       font-size: 13px;
+    }
+  }
+
+  .artisan-cards {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+  }
+}
+
+/* ============================================
+   PAGINATION
+============================================ */
+.pagination-nav {
+  margin-top: 2rem;
+}
+
+.pagination {
+  display: flex;
+  flex-wrap: wrap; // Permet aux boutons de passer à la ligne sur petits écrans
+  justify-content: center;
+  padding-left: 0;
+  list-style: none;
+  gap: 5px;
+
+  .page-item {
+    &.disabled .page-link {
+      color: $gray-light;
+      pointer-events: none;
+      cursor: default;
+      background-color: #fff;
+      border-color: #dee2e6;
+    }
+
+    &.active .page-link {
+      z-index: 3;
+      color: #fff;
+      background-color: $blue-primary;
+      border-color: $blue-primary;
+    }
+  }
+
+  .page-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    min-width: 44px;  /* Largeur min pour le tactile */
+    min-height: 44px; /* Hauteur min pour le tactile */
+    line-height: 1.25;
+    color: $blue-primary;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    cursor: pointer;
+    @include transition(all 0.2s ease-in-out);
+    border-radius: 0.25rem;
+
+    &:hover {
+      z-index: 2;
+      color: darken($blue-primary, 10%);
+      background-color: #e9ecef;
+      border-color: #dee2e6;
     }
   }
 }

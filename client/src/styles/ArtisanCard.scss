@@ -16,9 +16,16 @@ $star-color: #ffc403 !default;
   overflow: hidden;
   font-family: $font-family-base;
 
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  &:focus-within {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    }
   }
 
   &__header {
@@ -30,7 +37,7 @@ $star-color: #ffc403 !default;
 
   &__specialty {
     font-size: 0.9rem;
-    color: $blue-light;
+    color: #fff;
     background-color: $blue-primary;
     padding: 5px 10px;
     border-radius: 25px;
@@ -57,7 +64,7 @@ $star-color: #ffc403 !default;
     padding: 15px;
     border-top: 1px solid rgba($gray-light, 0.3);
     text-align: right;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     color: $blue-dark;
     background-color: rgba($blue-light, 0.3);
   }

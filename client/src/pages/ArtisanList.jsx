@@ -209,8 +209,8 @@ export default function ArtisanList() {
         <h1 className="title-with-line">{pageTitle}</h1>
 
         {/* Sélecteur du nombre d'éléments par page */}
-        <div style={{ marginBottom: "1rem", textAlign: "right" }}>
-          <label htmlFor="itemsPerPage" style={{ marginRight: "0.5rem" }}>Afficher :</label>
+        <div className="items-per-page-selector">
+          <label htmlFor="itemsPerPage">Afficher :</label>
           <select
             id="itemsPerPage"
             value={itemsPerPage}
@@ -225,35 +225,33 @@ export default function ArtisanList() {
           </select>
         </div>
 
-        <div className="artisan-cards" role="list">
+        <ul className="artisan-cards">
           {loading ? (
             <p>Chargement...</p>
           ) : currentItems.length > 0 ? (
             currentItems.map((artisan) => (
-              <Link 
-                to={`/artisans/${artisan.id}`} 
-                key={artisan.id} 
-                className="artisan-card-link" 
-                role="listitem"
-              >
-                <ArtisanCard {...artisan} />
-              </Link>
+              <li key={artisan.id}>
+                <Link to={`/artisans/${artisan.id}`} className="artisan-card-link">
+                  <ArtisanCard {...artisan} />
+                </Link>
+              </li>
             ))
           ) : (
             <p className="no-results">Aucun artisan trouvé.</p>
           )}
-        </div>
+        </ul>
 
         {/* Contrôles de Pagination */}
         {artisans.length > itemsPerPage && (
-          <nav aria-label="Navigation des pages" style={{ marginTop: "2rem" }}>
-            <div style={{ textAlign: "center", marginBottom: "1rem", fontWeight: "bold" }}>
-              Page {currentPage} sur {totalPages}
-            </div>
+          <nav className="pagination-nav" aria-label="Navigation des pages">
             <ul className="pagination justify-content-center">
               <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
-                <button className="page-link" onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}>
-                  &laquo; Précédent
+                <button 
+                  className="page-link" 
+                  onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                  aria-label="Page précédente"
+                >
+                  <span aria-hidden="true">&laquo;</span> Précédent
                 </button>
               </li>
               
@@ -266,6 +264,7 @@ export default function ArtisanList() {
                     className="page-link" 
                     onClick={() => typeof pageNum === "number" && setCurrentPage(pageNum)}
                     disabled={pageNum === "..."}
+                    aria-current={pageNum === currentPage ? "page" : undefined}
                   >
                     {pageNum}
                   </button>
@@ -273,8 +272,12 @@ export default function ArtisanList() {
               ))}
 
               <li className={`page-item ${currentPage === totalPages ? "disabled" : ""}`}>
-                <button className="page-link" onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}>
-                  Suivant &raquo;
+                <button 
+                  className="page-link" 
+                  onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                  aria-label="Page suivante"
+                >
+                  Suivant <span aria-hidden="true">&raquo;</span>
                 </button>
               </li>
             </ul>

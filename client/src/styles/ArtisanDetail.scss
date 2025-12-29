@@ -65,6 +65,12 @@ $star-color: #ffc403 !default;
       margin-top: 8px;
       border-radius: 2px;
     }
+
+    @include respond-to(sm) {
+      &::after {
+        margin: 8px auto 0;
+      }
+    }
   }
 
   .rating-display {
@@ -150,6 +156,9 @@ $star-color: #ffc403 !default;
       cursor: pointer;
       font-size: inherit;
       color: $gray-light;
+      padding: 8px;      /* Étend la zone cliquable */
+      min-width: 44px;   /* Standard mobile */
+      min-height: 44px;
       @include transition(color 0.2s ease);
 
       &.filled,
@@ -190,6 +199,50 @@ $star-color: #ffc403 !default;
       border-radius: 2px;
     }
   }
+
+  // Styles du formulaire pour l'accessibilité
+  form {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  label {
+    display: block;
+    text-align: left;
+    font-weight: 600;
+    color: $blue-dark;
+    margin-bottom: 5px;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid $gray-light;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-family: inherit;
+
+    &:focus {
+      outline: 2px solid $blue-primary;
+      border-color: $blue-primary;
+    }
+  }
+
+  button {
+    @include button-style($blue-primary, white);
+    align-self: center;
+    margin-top: 10px;
+    cursor: pointer;
+
+    &:focus {
+      outline: 2px solid $blue-dark;
+      outline-offset: 2px;
+    }
+  }
 }
 
 /* =============================================
@@ -198,6 +251,7 @@ $star-color: #ffc403 !default;
 .back-link {
   display: inline-block;
   margin-top: 15px;
+  padding: 10px 0; /* Facilite le clic sur mobile */
   color: $blue-dark;
   text-decoration: underline;
   font-weight: 600;

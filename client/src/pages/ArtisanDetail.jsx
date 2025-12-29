@@ -30,7 +30,7 @@ export default function ArtisanDetail() {
         const normalizedData = {
           ...data,
           nom: data.nom || data.name,
-          note: data.note || data.rating,
+          note: Number(data.note || data.rating) || 0,
           ville: data.ville || data.location,
           a_propos: data.a_propos || data.description,
           nom_specialite: data.Specialite?.nom_specialite || data.nom_specialite || data.specialty,
@@ -48,7 +48,7 @@ export default function ArtisanDetail() {
           setArtisan({
             ...found,
             nom: found.name,
-            note: found.rating,
+            note: Number(found.rating) || 0,
             ville: found.location,
             a_propos: found.description,
             nom_specialite: found.specialty,
@@ -182,11 +182,11 @@ export default function ArtisanDetail() {
           onClick={() => navigate(-1)} 
           className="back-link" 
           style={{background: 'none', border: 'none', cursor: 'pointer', padding: 0, font: 'inherit', textDecoration: 'underline'}}>
-          ← Retour
+          <span aria-hidden="true">←</span> Retour
         </button>
         <br />
         <Link to="/" className="back-link">
-          ← Retour à la page d'accueil
+          <span aria-hidden="true">←</span> Retour à la page d'accueil
         </Link>
       </main>
 
