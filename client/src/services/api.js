@@ -1,4 +1,4 @@
-const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3001";
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3006";
 
 const api = {
   /**
@@ -79,7 +79,64 @@ const api = {
       console.error("Erreur dans getSpecialties:", error);
       throw error;
     }
-  }
+  },
+
+  /**
+   * Crée un nouvel artisan
+   * @param {FormData} formData 
+   */
+  createArtisan: async (formData) => {
+    try {
+      const response = await fetch(`${API_URL}/api/artisans`, {
+        method: 'POST',
+        body: formData, // Pas de 'Content-Type' avec FormData, le navigateur le gère
+      });
+      if (!response.ok) {
+        const errData = await response.json();
+        throw new Error(errData.error || 'Erreur lors de la création de l\'artisan');
+      }
+      return await response.json();
+    } catch (error) {
+      console.error("Erreur dans createArtisan:", error);
+      throw error;
+    }
+  },
+
+  /**
+   * Met à jour un artisan
+   * @param {string|number} id 
+   * @param {FormData} formData 
+   */
+  updateArtisan: async (id, formData) => {
+    try {
+      const response = await fetch(`${API_URL}/api/artisans/${id}`, {
+        method: 'PUT',
+        body: formData,
+      });
+      if (!response.ok) throw new Error('Erreur lors de la mise à jour de l\'artisan');
+      return await response.json();
+    } catch (error) {
+      console.error(`Erreur dans updateArtisan (${id}):`, error);
+      throw error;
+    }
+  },
+
+  /**
+   * Supprime un artisan
+   * @param {string|number} id 
+   */
+  deleteArtisan: async (id) => {
+    try {
+      const response = await fetch(`${API_URL}/api/artisans/${id}`, {
+        method: 'DELETE',
+      });
+      if (!response.ok) throw new Error('Erreur lors de la suppression de l\'artisan');
+      return await response.json();
+    } catch (error) {
+      console.error(`Erreur dans deleteArtisan (${id}):`, error);
+      throw error;
+    }
+  },
 };
 
 export default api;
