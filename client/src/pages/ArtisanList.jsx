@@ -38,7 +38,6 @@ export default function ArtisanList() {
 
   // 1. Charger les données
   useEffect(() => {
-    console.log("URL API utilisée :", API_URL);
     const fetchData = async () => {
       try {
         const res = await fetch(`${API_URL}/api/artisans`);

@@ -4,6 +4,8 @@ import Footer from '../components/Footer';
 import '../styles/Admin.scss';
 import api from '../services/api';
 
+const API_URL = (process.env.REACT_APP_API_URL || "http://localhost:3006").replace(/\/$/, "");
+
 export default function Admin() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [username, setUsername] = useState('');

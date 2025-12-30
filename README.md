@@ -1,63 +1,79 @@
+# Trouve ton Artisan
 
-# 🏠 Trouve ton Artisan
+Bienvenue sur le dépôt du projet **Trouve ton Artisan**, une plateforme web de mise en relation entre les artisans de la région Auvergne-Rhône-Alpes et les particuliers.
 
-Bienvenue sur le dépôt du projet **Trouve ton Artisan**.
-Cette application web permet de mettre en relation des particuliers avec des artisans de la région Auvergne-Rhône-Alpes.
+## 📋 Description
 
-## 🏗 Architecture du Projet
+Ce projet a pour objectif de valoriser l'artisanat local en offrant une interface simple, moderne et accessible pour rechercher des professionnels qualifiés. Il comprend une partie publique pour les utilisateurs et une interface d'administration sécurisée pour la gestion des données.
 
-Ce projet est une application **Full Stack** composée de deux parties principales :
+## ✨ Fonctionnalités
 
-- **Frontend (`/client`)** : Interface utilisateur réalisée avec **React**.
-- **Backend (`/server`)** : API REST réalisée avec **Node.js**, **Express** et **Sequelize** (MySQL).
+### Partie Publique (Utilisateurs)
+- **Accueil dynamique** : Mise en avant des "Artisans du mois" (les mieux notés) et guide d'utilisation.
+- **Recherche avancée** :
+  - Filtrage par catégorie : Bâtiment, Services, Fabrication, Alimentation.
+  - Barre de recherche globale (nom, ville, spécialité).
+- **Fiches détaillées** : Informations complètes sur chaque artisan (note, spécialité, localisation, site web, description).
+- **Accessibilité** : Respect des normes WCAG (navigation clavier, contrastes, balises ARIA).
+- **Responsive Design** : Interface adaptée aux mobiles, tablettes et ordinateurs.
 
-## 📦 Prérequis
+### Partie Administration (Privée)
+- **Authentification** : Accès sécurisé à l'espace de gestion.
+- **Tableau de bord** : Vue d'ensemble de la liste des artisans.
+- **Gestion complète (CRUD)** :
+  - **Ajouter** un nouvel artisan avec upload de photo.
+  - **Modifier** les informations d'un artisan existant.
+  - **Supprimer** un artisan de la base de données.
+- **Outils de gestion** : Barre de recherche interne et pagination pour naviguer efficacement dans la liste.
 
-Avant de commencer, assurez-vous d'avoir installé :
-- Node.js (v14 ou supérieur)
-- MySQL (Serveur de base de données)
-- Un éditeur de code (ex: VS Code)
+## 🛠 Stack Technique
 
-## 🚀 Installation et Démarrage
+**Frontend :**
+- React.js
+- React Router (Navigation)
+- SCSS (Architecture BEM, Variables, Mixins)
 
-### 1. Cloner le projet
-```bash
-git clone <votre-url-repo>
-cd trouve_ton_artisan_segurakathleen_devoirbilan
-```
+**Backend :**
+- Node.js
+- Express.js
+- Multer (Gestion des uploads d'images)
+- API RESTful
 
-### 2. Configuration de la Base de Données
-1. Lancez votre serveur MySQL (via WAMP, XAMPP, ou Docker).
-2. Créez une base de données vide nommée `trouve_ton_artisan_db`.
-3. (Optionnel) Configurez les accès dans un fichier `.env` dans le dossier `server` si vos identifiants ne sont pas `root` / (vide).
+## 🚀 Installation et Lancement
 
-### 3. Installation et Lancement du Backend
+### Prérequis
+- Node.js installé sur votre machine.
+
+### 1. Installation et lancement du Serveur (Backend)
+
 ```bash
 cd server
 npm install
-
-# Remplir la base de données avec les données de test
-node seed.js
-
-# Démarrer le serveur (Port 3006)
+# Lancer le serveur (tourne par défaut sur le port 3006)
 npm start
 ```
 
-### 4. Installation et Lancement du Frontend
-Ouvrez un **nouveau terminal** à la racine du projet :
+### 2. Installation et lancement du Client (Frontend)
+
+Ouvrez un nouveau terminal :
+
 ```bash
 cd client
 npm install
-
-# Démarrer l'application React (Port 3000)
+# Lancer l'application React
 npm start
 ```
 
-L'application sera accessible sur http://localhost:3000.
+L'application sera accessible à l'adresse `http://localhost:3000`.
 
-## 🌐 Liens Utiles
+## ⚙️ Configuration
 
-- **Site en ligne** : [trouve-ton-artisan-ebon.vercel.app/](https://trouve-ton-artisan-ebon.vercel.app/)
-- **Maquettes Figma** :https://www.figma.com/design/0vDIwotZXW9X18Kfd1duEL/trouve_ton_artisan?node-id=205-427&t=kFi1UZnvlQO7YKwS-1
+- **Client** : Le fichier `.env` côté client doit pointer vers l'URL de l'API (`REACT_APP_API_URL=http://localhost:3006`).
+- **Serveur** : Assurez-vous que le dossier `public/images` existe à la racine du dossier `server` pour permettre l'enregistrement des images uploadées.
+
 ## 👤 Auteur
-Kathleen Segura - Devoir Bilan
+
+Projet réalisé par **Kathleen Segura** dans le cadre du devoir bilan.
+
+---
+*Développé avec ❤️ pour l'artisanat local.*
