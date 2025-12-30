@@ -209,7 +209,7 @@ export default function ArtisanList() {
         <h1 className="title-with-line">{pageTitle}</h1>
 
         {/* Sélecteur du nombre d'éléments par page */}
-        <div className="items-per-page-selector">
+        <div className="items-per-page-selector" style={{ display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "3px" }}>
           <label htmlFor="itemsPerPage">Afficher :</label>
           <select
             id="itemsPerPage"
@@ -230,7 +230,7 @@ export default function ArtisanList() {
             <p>Chargement...</p>
           ) : currentItems.length > 0 ? (
             currentItems.map((artisan) => (
-              <li key={artisan.id}>
+              <li key={artisan.id} style={{ listStyle: "none" }}>
                 <Link to={`/artisans/${artisan.id}`} className="artisan-card-link">
                   <ArtisanCard {...artisan} />
                 </Link>

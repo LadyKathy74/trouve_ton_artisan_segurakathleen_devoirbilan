@@ -67,16 +67,27 @@ $card-min-height: 150px;
   }
 
   select {
-    padding: 10px 14px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding: 10px 35px 10px 14px;
     min-height: 44px; /* Zone tactile confortable (WCAG) */
     border: 1px solid $gray-light;
     border-radius: 8px;
     background-color: white;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px;
     color: $blue-dark;
     font-family: inherit;
     cursor: pointer;
     outline: none;
     transition: border-color 0.2s, box-shadow 0.2s;
+
+    &:hover {
+      border-color: $blue-primary;
+    }
 
     &:focus {
       border-color: $blue-primary;
