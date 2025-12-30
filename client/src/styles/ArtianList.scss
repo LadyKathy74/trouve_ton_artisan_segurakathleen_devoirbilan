@@ -93,6 +93,14 @@ $card-min-height: 150px;
       border-color: $blue-primary;
       box-shadow: 0 0 0 3px rgba($blue-primary, 0.15);
     }
+
+    option {
+      // La stylisation des options est limitée. Seules quelques propriétés
+      // comme color et background-color sont fiables sur tous les navigateurs.
+      background: white;
+      color: $blue-dark;
+      padding: 8px 12px; // Le padding est souvent ignoré.
+    }
   }
 
   @include respond-to(sm) {
